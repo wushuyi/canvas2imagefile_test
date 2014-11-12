@@ -34,11 +34,13 @@
 			// 解析 base64
 			base64Img = base64Img.split(';base64,')[1];
 			//console.log(base64Img);
-			base64Img = base64.decode(base64Img);
+			//base64Img = base64.decode(base64Img);
 			//console.log(base64Img);
+			//console.log(base64.encode(base64Img));
 
 			// 将 转码后的图片 装入图片对象
-			var generatedFile = new File([base64Img], "test.png", {type: "image/png", lastModified: new Date()});
+			var blob = base64ToBlob(base64Img, 'image/png');
+			var generatedFile = new File([blob], "test.png", {type: "image/png", lastModified: new Date()});
 
 			// 读取改图片对象
 			var reader = new FileReader();
@@ -47,7 +49,20 @@
 				//console.log(this.result);
 			});
 			console.log(generatedFile);
-			//console.log(util.stream2Url(generatedFile));
+			var blobUrl = util.stream2Url(generatedFile);
+			console.log(blobUrl);
+			/*
+			$.get(blobUrl, function(data){
+				var base64Img = base64.encode(data);
+				var blob = base64ToBlob(base64Img, 'image/png');
+				var url = window.URL.createObjectURL(blob);
+				console.log(url);
+				//base64Img = 'data:image/png;base64,' + base64Img;
+				//console.log(base64Img);
+				//var test = new File([base64Img], "test.png", {type: "text/plan", lastModified: new Date()});
+				//console.log(util.stream2Url(test));
+			})
+			*/
 		}
 
 		// input 读取文件
