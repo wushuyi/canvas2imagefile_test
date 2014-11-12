@@ -3,7 +3,7 @@
   function base64ToBlob(base64, mime) {
     mime = mime || '';
     var sliceSize = 1024;
-    var byteChars = window.atob(base64);
+    var byteChars = window.atob(base64) || window.base64.decode(base64);
     var byteArrays = [];
 
     for (var offset = 0, len = byteChars.length; offset < len; offset += sliceSize) {
