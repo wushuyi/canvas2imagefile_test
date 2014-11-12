@@ -39,8 +39,11 @@
 			//console.log(base64.encode(base64Img));
 
 			// 将 转码后的图片 装入图片对象
+			//var generatedFile = new File([base64Img], "test.png", {type: "image/png", lastModified: new Date()});
+
 			var blob = base64ToBlob(base64Img, 'image/png');
 			var generatedFile = new File([blob], "test.png", {type: "image/png", lastModified: new Date()});
+
 
 			// 读取改图片对象
 			var reader = new FileReader();
